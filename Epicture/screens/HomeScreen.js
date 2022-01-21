@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text, ScrollView } from "react-native";
 import DisplayPicture from "../components/aboutDisplay/DisplayPicture";
 import axios from "axios";
-import OtherDisplay from "../components/aboutDisplay/OtherDisplay";
 
 const HomeScreen = () => {
   const [viralsArray, setViralsArray] = useState([]);
@@ -25,16 +24,19 @@ const HomeScreen = () => {
         console.log("error : ", err);
       });
   }, []);
-
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {
+          flexDirection: "column",
+          backgroundColor: "#2A3239",
+        },
+      ]}
+    >
       {isLoading ? (
         <ScrollView>
           {viralsArray.map((image) => {
             return (
               <View key={image.id}>
-                {/*<DisplayPicture image={image} />*/}
-                <OtherDisplay image={image} />
+                <DisplayPicture image={image} />
               </View>
             );
           })}
@@ -44,7 +46,7 @@ const HomeScreen = () => {
           <Text>Is Loading ...</Text>
         </View>
       )}
-      {/* <View style={{ flex: 5, backgroundColor: "#2A3239" }}></View> */}
+
     </View>
   );
 };
@@ -54,8 +56,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: 1000,
-    flexDirection: "column",
-    backgroundColor: "#2A3239",
   },
   myState: {
     marginTop: 0,

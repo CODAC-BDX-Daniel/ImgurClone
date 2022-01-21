@@ -8,13 +8,27 @@ var height = Dimensions.get("window").height; //full height
 const DisplayPicture = (props) => {
   const image = props.image;
   let url;
-  if (image.cover) {
-    url = "https://i.imgur.com/" + image.cover + ".jpg";
-  } else if (image.link) {
-    url = image.link;
-  } else {
+  if (!image.cover) {
     url = "https://stickeramoi.com/9333-large_default/sticker-lettre-e.jpg";
+  } else {
+    url = "https://i.imgur.com/" + image.cover + ".jpg";
   }
+
+  //   useEffect(async () => {
+  //     if (!tableau) {
+  //       setUrl("https://stickeramoi.com/9333-large_default/sticker-lettre-e.jpg");
+  //     } else {
+  //       tableau.map((image) => {
+  //         if (image.type === "image/jpeg") {
+  //           setUrl(image.link);
+  //         } else {
+  //           setUrl(
+  //             "https://stickeramoi.com/9333-large_default/sticker-lettre-e.jpg"
+  //           );
+  //         }
+  //       });
+  //     }
+  //   }, []);
 
   return (
     <View style={styles.display}>
@@ -24,7 +38,7 @@ const DisplayPicture = (props) => {
           uri: url,
         }}
       />
-      <Text style={styles.text}>{url}</Text>
+
       <Text style={styles.text}>{image.title}</Text>
       <NbViews image={image} />
       <ButtonFav image={image} />
@@ -41,8 +55,8 @@ const styles = StyleSheet.create({
   },
   display: {
     width: width,
-    height: height * 0.7,
-    paddingBottom: 20,
+    height: height / 1.5,
+    paddingVertical: 20,
   },
   text: {
     color: "white",

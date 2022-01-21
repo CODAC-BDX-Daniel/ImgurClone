@@ -6,17 +6,14 @@ import { StyleSheet, Text, View } from "react-native";
 
 export default App = () => {
   return (
-    <NavigationContainer>
-      <Tabs />
-    </NavigationContainer>
+      <NavigationContainer>
+        <Tabs />
+      </NavigationContainer>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    /* flex: 1,
-        paddingTop: 45,*/
-  },
+
   myState: {
     /*  marginTop: 35,
         textAlign: 'left',

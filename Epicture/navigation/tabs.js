@@ -5,14 +5,17 @@ import HomeScreen from "../screens/HomeScreen";
 import FindScreen from "../screens/FindScreen";
 import AddScreen from "../screens/AddScreen";
 import UserScreen from "../screens/UserScreen";
-import { View, Image, Text, StyleSheet, Dimensions } from "react-native";
-
-var width = Dimensions.get("window").width; //full width
+import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
+import Login from "../components/login";
 
 function LogoTitle() {
   return (
     <View style={styles.header}>
-      <Text style={styles.logo}>Epicture</Text>
+      <Image
+        style={styles.logo}
+        source={require("../assets/LogoEpicture.png")}
+      />
+      <Login style={styles.login} />
     </View>
   );
 }
@@ -30,13 +33,11 @@ const Tabs = () => {
           title: "",
           headerStyle: {
             backgroundColor: "#2A3239",
-            height: 100,
           },
-
+          headerTintColor: "#fff",
           headerTitleStyle: {
-            fontWeight: "bold",
+            fontWeight: "light",
           },
-
           tabBarIcon: ({ focused }) => (
             <View style={styles.screen}>
               <Image
@@ -54,7 +55,7 @@ const Tabs = () => {
         options={{
           headerTitle: (props) => <LogoTitle {...props} />,
           title: "",
-          headerStyle: { backgroundColor: "#2A3239", height: 100 },
+          headerStyle: { backgroundColor: "#2A3239" },
           headerTintColor: "#fff",
           headerTitleStyle: { fontWeight: "light" },
           tabBarIcon: ({ focused }) => (
@@ -76,9 +77,11 @@ const Tabs = () => {
           title: "",
           headerStyle: {
             backgroundColor: "#2A3239",
-            height: 100,
           },
-
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "light",
+          },
           tabBarIcon: ({ focused }) => (
             <View style={styles.screen}>
               <Image
@@ -98,7 +101,6 @@ const Tabs = () => {
           title: "",
           headerStyle: {
             backgroundColor: "#2A3239",
-            height: 100,
           },
           headerTintColor: "#fff",
           headerTitleStyle: {
@@ -123,13 +125,8 @@ export default Tabs;
 
 const styles = StyleSheet.create({
   header: {
-    width: width,
-
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "flex-start",
-
-    color: "white",
   },
   icon: {
     width: 100,
@@ -145,8 +142,7 @@ const styles = StyleSheet.create({
     height: 80,
   },
   logo: {
-    color: "white",
-    fontSize: 60,
-    fontWeight: "bold",
+    width: 200,
+    height: 50,
   },
 });
