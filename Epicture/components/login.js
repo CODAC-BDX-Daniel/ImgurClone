@@ -1,14 +1,12 @@
 import * as React from "react";
 import * as WebBrowser from "expo-web-browser";
-import { CLIENT_ID, CLIENT_SECRET } from "@env";
 import {
   makeRedirectUri,
   useAuthRequest,
   ResponseType,
 } from "expo-auth-session";
-import { StyleSheet, Text, Pressable } from "react-native";
+import { Text } from "react-native";
 import * as SecureStore from "expo-secure-store";
-
 WebBrowser.maybeCompleteAuthSession();
 
 const discovery = {
@@ -16,16 +14,18 @@ const discovery = {
   tokenEndpoint: "https://api.imgur.com/oauth2/token",
 };
 
-export default function Login({ navigation }) {
+export default function Login() {
   // Request
   const [request, response, promptAsync] = useAuthRequest(
     {
       responseType: ResponseType.Token,
-      clientId: CLIENT_ID,
-      clientSecret: CLIENT_SECRET,
+      clientId: "a8772d9a582dde6",
+      clientSecret: "a2f5dc0df9009b23ec4c25d3388b1532ee3b1b0e",
       redirectUri: makeRedirectUri({
         scheme: "undefined",
+
       }),
+
       // imgur requires an empty array
       scopes: [],
     },
@@ -36,41 +36,19 @@ export default function Login({ navigation }) {
     if (response?.type === "success") {
       const { access_token } = response.params;
       SecureStore.setItemAsync("secure_token", access_token);
-      navigation.navigate("Epicture", {
-        screen: "Epicture",
-      });
       alert("Connexion Réussi");
     }
   }, [response]);
 
   return (
-    <Pressable
+    <Text
       disabled={!request}
-      style={styles.button}
+      color="#f194ff"
       onPress={() => {
         promptAsync();
       }}
     >
-      <Text style={styles.textButton}>Login</Text>
-    </Pressable>
+      Login
+    </Text>
   );
 }
-
-const styles = StyleSheet.create({
-  button: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    backgroundColor: "black",
-  },
-  textButton: {
-    fontSize: 16,
-    lineHeight: 21,
-    fontWeight: "bold",
-    letterSpacing: 0.25,
-    color: "white",
-  },
-});
